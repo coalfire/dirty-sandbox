@@ -20,6 +20,7 @@ module "subnets" {
 
   region             = "${var.region}"
   count              = "${var.count["utils"]}"
+  env                = "${var.env}"
   vpc_cidr           = "${var.vpc_cidr}"
   vpc_id             = "${aws_vpc.dirty-sandbox.id}"
   availability_zones = "${var.availability_zones}"
