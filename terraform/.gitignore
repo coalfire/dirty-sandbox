@@ -1,0 +1,9 @@
+variables.tf
+secrets.tf
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+keys/deployer
+keys/deployer.pub
+keys/master
+keys/master.pub
