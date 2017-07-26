@@ -2,16 +2,16 @@ module "utils_rta" {
   source = "modules/route_table_association"
 
   count       = "${var.count["utils"]}"
-  route_table = "${aws_route_table.devel-tools.id}"
+  route_table = "${aws_route_table.dirty-sandbox.id}"
   subnet_ids  = "${module.subnets.utils_subnet_ids}"
 }
 
 module "salt" {
   source = "modules/salt"
 
-  count      = "${var.count["utils"]}"
+  count = "${var.count["utils"]}"
 
-  env  = "${var.env}"
+  env = "${var.env}"
 
   centos7_ami = "${var.centos7_ami["${var.region}"]}"
   ssh_key     = "${aws_key_pair.deployer.key_name}"
@@ -34,7 +34,7 @@ output "salt-public-addresses" {
 resource "aws_security_group" "salt" {
   name        = "salt"
   description = "salt from our VPC"
-  vpc_id      = "${aws_vpc.devel-tools.id}"
+  vpc_id      = "${aws_vpc.dirty-sandbox.id}"
 
   ingress {
     from_port = 4505
@@ -42,13 +42,13 @@ resource "aws_security_group" "salt" {
     protocol  = "tcp"
 
     cidr_blocks = [
-      "${aws_vpc.devel-tools.cidr_block}",
+      "${aws_vpc.dirty-sandbox.cidr_block}",
     ]
   }
 
   tags {
-    Name       = "salt"
-    env = "${var.env}"
-    terraform  = "yes"
+    Name      = "salt"
+    env       = "${var.env}"
+    terraform = "yes"
   }
 }

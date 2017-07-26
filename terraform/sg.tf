@@ -8,13 +8,13 @@ resource "aws_security_group" "ssh_manage" {
     to_port   = 22
     protocol  = "tcp"
 
-    cidr_blocks = [ "${var.mgmt_cidrs}" ]
+    cidr_blocks = ["${var.mgmt_cidrs}"]
   }
 
   tags {
-    Name       = "ssh_manage"
-    env = "${var.env}"
-    terraform  = "yes"
+    Name      = "ssh_manage"
+    env       = "${var.env}"
+    terraform = "yes"
   }
 }
 
@@ -31,14 +31,14 @@ resource "aws_security_group" "universal_egress" {
   }
 
   tags {
-    Name       = "universal_egress"
-    env = "${var.env}"
-    terraform  = "yes"
+    Name      = "universal_egress"
+    env       = "${var.env}"
+    terraform = "yes"
   }
 }
 
 resource "aws_security_group" "scan_me" {
-  name = "scan_me"
+  name        = "scan_me"
   description = "white list a scanning service"
   vpc_id      = "${aws_vpc.dirty-sandbox.id}"
 
@@ -51,8 +51,8 @@ resource "aws_security_group" "scan_me" {
   }
 
   tags {
-    Name = "scan_me"
-    env = "${var.env}"
-    terraform  = "yes"
+    Name      = "scan_me"
+    env       = "${var.env}"
+    terraform = "yes"
   }
 }

@@ -2,9 +2,9 @@ resource "aws_internet_gateway" "dirty-sandbox" {
   vpc_id = "${aws_vpc.dirty-sandbox.id}"
 
   tags {
-    Name       = "dirty-sandbox"
-    env = "${var.env}"
-    terraform  = "yes"
+    Name      = "dirty-sandbox"
+    env       = "${var.env}"
+    terraform = "yes"
   }
 }
 
@@ -17,8 +17,8 @@ resource "aws_route_table" "dirty-sandbox" {
   }
 
   tags {
-    Name       = "dirty-sandbox"
-    env = "${var.env}"
-    terraform  = "yes"
+    Name      = "dirty-sandbox"
+    env       = "${var.env}"
+    terraform = "yes"
   }
 }

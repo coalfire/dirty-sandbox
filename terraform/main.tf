@@ -5,13 +5,13 @@ provider "aws" {
 }
 
 resource "aws_vpc" "dirty-sandbox" {
-  cidr_block = "${var.vpc_cidr}"
+  cidr_block           = "${var.vpc_cidr}"
   enable_dns_hostnames = true
 
   tags {
-    Name       = "dirty-sandbox"
-    env = "${var.env}"
-    terraform  = "yes"
+    Name      = "dirty-sandbox"
+    env       = "${var.env}"
+    terraform = "yes"
   }
 }
 
@@ -21,7 +21,7 @@ module "subnets" {
   region             = "${var.region}"
   count              = "${var.count["utils"]}"
   vpc_cidr           = "${var.vpc_cidr}"
-  vpc_id             = "${aws_vpc.devel-tools.id}"
+  vpc_id             = "${aws_vpc.dirty-sandbox.id}"
   availability_zones = "${var.availability_zones}"
 }
 

@@ -43,8 +43,8 @@ resource "aws_instance" "salt" {
   }
 
   tags {
-    Name       = "${format("salt-%02d", count.index + 1)}"
-    env = "${var.env}"
-    terraform  = "yes"
+    Name      = "${format("salt-%02d", count.index + 1)}"
+    env       = "${var.env}"
+    terraform = "yes"
   }
 }

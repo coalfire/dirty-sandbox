@@ -6,9 +6,9 @@ resource "aws_subnet" "utils" {
   map_public_ip_on_launch = false
 
   tags {
-    Name       = "${format("utils-%02d", count.index + 1)}"
-    env = "${var.env}"
-    terraform  = "yes"
+    Name      = "${format("utils-%02d", count.index + 1)}"
+    env       = "${var.env}"
+    terraform = "yes"
   }
 }
 
@@ -20,8 +20,8 @@ resource "aws_subnet" "dirty-sandbox" {
   map_public_ip_on_launch = false
 
   tags {
-    Name       = "${format("dirty-sandbox-%02d", count.index + 1)}"
-    env = "${var.env}"
-    terraform  = "yes"
+    Name      = "${format("dirty-sandbox-%02d", count.index + 1)}"
+    env       = "${var.env}"
+    terraform = "yes"
   }
 }
