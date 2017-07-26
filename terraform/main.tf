@@ -10,7 +10,7 @@ resource "aws_vpc" "dirty-sandbox" {
 
   tags {
     Name       = "dirty-sandbox"
-    department = "${var.department}"
+    env = "${var.env}"
     terraform  = "yes"
     env
   }
@@ -23,7 +23,6 @@ module "subnets" {
   count              = "${var.count["utils"]}"
   vpc_cidr           = "${var.vpc_cidr}"
   vpc_id             = "${aws_vpc.devel-tools.id}"
-  department         = "${var.department}"
   availability_zones = "${var.availability_zones}"
 }
 
