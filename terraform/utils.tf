@@ -11,6 +11,8 @@ module "salt" {
 
   count      = "${var.count["utils"]}"
 
+  env  = "${var.env}"
+
   centos7_ami = "${var.centos7_ami["${var.region}"]}"
   ssh_key     = "${aws_key_pair.deployer.key_name}"
 

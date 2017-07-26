@@ -12,7 +12,6 @@ resource "aws_vpc" "dirty-sandbox" {
     Name       = "dirty-sandbox"
     env = "${var.env}"
     terraform  = "yes"
-    env
   }
 }
 
