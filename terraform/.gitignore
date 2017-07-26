@@ -1,5 +1,5 @@
-variables.tf
-secrets.tf
+/variables.tf
+/secrets.tf
 .terraform/
 terraform.tfstate
 terraform.tfstate.backup
