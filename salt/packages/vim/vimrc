@@ -1,0 +1,56 @@
+set nocompatible
+
+set nomodeline          
+
+set number
+
+set nowrap                       " one line per line
+set linebreak                    " but if we do wrap, respect words
+set showbreak=↳\                 " shown at the start of a wrapped line
+
+syntax on                        " syntax highlighting on
+if &diff
+	colorscheme badwolf
+endif
+
+"" VIM MANAGEMENT
+                                 " use pathogen for .vim package management:
+                                 " cd ~/.vim/bundle
+                                 " git clone git://github.com/thing/plugin.git
+                                 " :Helptags
+call pathogen#infect() 
+
+"" STATUS LINE
+set showmode                     " what mode am I in?
+
+set laststatus=2                 " always show the status line 
+
+set statusline+=%F               " full path
+set statusline+=%=               " everything after this on the right
+set statusline+=Col\ %c\|%v\       " column|virtual column
+set statusline+=Line\ %l\/%L\       " line
+set statusline+=(%p%%)           " percentage in to file
+
+" INDENT
+set autoindent                   " copy indent from current line
+set smartindent                  " indent after {, cinwords, before }
+                                 " except comment to beginning of line crap:
+                                 " type an X, rub it out, then type an #
+inoremap # X#
+
+set tabstop=4                    " number of spaces for tab
+set shiftwidth=4                 " number of spaces for autoindent
+set expandtab                    " no real tabs please!
+
+set splitbelow                   " new windows below 
+set splitright                   " new vertical windows to the right
+
+set history=10000
+set undolevels=10000
+
+"" SEARCH 
+set incsearch                    " show search matches while typing
+set ignorecase                   " ignore case while searching, unless...
+set smartcase                    " the search has any upper case
+
+set secure                    "keep this at the end of this file.
