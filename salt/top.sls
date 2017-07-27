@@ -19,5 +19,6 @@ base:
     - match: grain
     - packages.tmux
     - packages.vim
+    - packages.vsftpd
 
 
