@@ -7,3 +7,4 @@ keys/deployer
 keys/deployer.pub
 keys/master
 keys/master.pub
+*.plan

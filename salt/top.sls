@@ -20,5 +20,3 @@ base:
     - packages.tmux
     - packages.vim
     - packages.vsftpd
-
-

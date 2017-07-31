@@ -1,4 +1,4 @@
-module "insecure_services" {
+module "unknown_service" {
   source = "modules/ec2"
 
 
@@ -6,7 +6,7 @@ module "insecure_services" {
   aws_secret_key = "${var.aws_secret_key}"
   region = "${var.region}"
 
-  instance_name = "insecure_services"
+  instance_name = "unknown_service"
   env = "${var.env}"
 
   ami_id = "${var.centos7_ami["${var.region}"]}"
@@ -22,11 +22,12 @@ module "insecure_services" {
 
   subnet_id   = "${module.target_subnet.subnet_id}"
   subnet_cidr = "${module.target_subnet.subnet_cidr}"
-  ip_offset = 4
+  ip_offset = 5
 
   user = "centos"
   private_key = "${file("keys/deployer")}"
   
-  user_data = "user_data/insecure_services"
+  user_data = "user_data/unknown_service"
 }
+
 
