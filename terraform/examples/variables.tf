@@ -30,6 +30,6 @@ variable "count" {
   type = "map"
 
   default = {
-    "utils" = 2
+    "salt" = 1
   }
 }

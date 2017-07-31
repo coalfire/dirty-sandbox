@@ -4,7 +4,4 @@ variable "count" {
   default = 1
 }
 
-variable "subnet_ids" {
-  type    = "list"
-  default = []
-}
+variable "subnet_id" {}

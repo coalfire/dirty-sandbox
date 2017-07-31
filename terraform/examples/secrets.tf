@@ -1,8 +1,8 @@
-variable "access_key" {
+variable "aws_access_key" {
   default = "AWS_ACCESS_KEY_CHANGE_ME"
 }
 
-variable "secret_key" {
+variable "aws_secret_key" {
   default = "AWS_SECRET_KEY_CHANGE_ME"
 }
 

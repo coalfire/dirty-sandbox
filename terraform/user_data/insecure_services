@@ -1,0 +1,26 @@
+#!/bin/sh
+
+cat <<EOF >/etc/yum.repos.d/saltstack.repo
+[saltstack-repo]
+name=SaltStack repo for RHEL/CentOS $releasever
+baseurl=https://repo.saltstack.com/yum/redhat/\$releasever/\$basearch/archive/2016.11.5
+enabled=1
+gpgcheck=1
+gpgkey=https://repo.saltstack.com/yum/redhat/\$releasever/\$basearch/archive/2017.7.0/SALTSTACK-GPG-KEY.pub
+EOF
+
+yum clean expire-cache
+yum -y install salt-minion 
+
+sleep 300
+
+echo 'role:' >>/etc/salt/grains
+echo '- insecure_services' >>/etc/salt/grains
+
+mkdir -p /etc/salt/minion.d/
+echo 'master: salt.dirty.insec' >/etc/salt/minion.d/master.conf
+
+systemctl enable salt-minion
+systemctl restart salt-minion
+
+salt-call state.highstate | tee /var/log/highstate

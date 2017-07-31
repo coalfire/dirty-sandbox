@@ -1,5 +1,6 @@
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
+variable "region" {}
 
 variable "instance_name" {}
 
@@ -34,4 +35,15 @@ variable "subnet_cidr" {}
 variable "ip_offset" {
   description = "where to start ips in the cidr block"
   default     = 4
+}
+
+variable "user" {
+  default = "root"
+}
+
+variable "private_key" {}
+
+
+variable "env" {
+  default = "qa"
 }

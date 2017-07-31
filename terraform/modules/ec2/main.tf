@@ -1,7 +1,7 @@
 provider "aws" {
   access_key = "${var.aws_access_key}"
   secret_key = "${var.aws_secret_key}"
-  region     = "${var.aws_region}"
+  region     = "${var.region}"
 }
 
 resource "aws_instance" "ec2_instance" {
@@ -12,7 +12,7 @@ resource "aws_instance" "ec2_instance" {
   instance_type = "${var.instance_type}"
   key_name      = "${var.ssh_key}"
 
-  vpc_security_group_ids = "${var.security_group_ids}"
+  vpc_security_group_ids = [ "${var.security_group_ids}" ]
 
   associate_public_ip_address = "${var.has_public_ip}"
   private_ip                  = "${cidrhost("${var.subnet_cidr}", count.index + "${var.ip_offset}")}"
@@ -25,3 +25,4 @@ resource "aws_instance" "ec2_instance" {
     terraform = "yes"
   }
 }
+
