@@ -42,8 +42,8 @@ lighttpd-config:
 lighttpd-cert-dir:
   file.directory:
     - name: /etc/lighttpd/certs
-    - user: lighttpd
-    - group: lighttpd
+    - user: root
+    - group: root
     - mode: 0755
     - require: 
       - pkg: lighttpd-package
@@ -51,5 +51,4 @@ lighttpd-cert-dir:
 lighttpd-cert:
   cmd.run:
     - creates: /etc/lighttpd/certs/lighttpd.pem
-    - name: cd /etc/lighttpd/certs; openssl req -new -x509 -keyout lighttpd.pem -out lighttpd.pem -days 365 -nodes; chmod 400 lighttpd.pem
-
+    - name: cd /etc/lighttpd/certs; openssl req -new -x509 -keyout lighttpd.pem -out lighttpd.pem -days 365 -nodes; chmod 600 lighttpd.pem
