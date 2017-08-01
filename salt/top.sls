@@ -13,8 +13,7 @@ base:
 
   'role:anonymous_key':
     - match: grain
-    - packages.apache
-    - packages.apache.tls_anonymous
+    - packages.lighttpd
     - packages.tmux
 
   'role:insecure_services':
