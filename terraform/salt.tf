@@ -45,6 +45,7 @@ module "salt_ec2" {
     "${aws_security_group.salt.id}",
     "${aws_security_group.ssh_manage.id}",
     "${aws_security_group.http_out.id}",
+    "${aws_security_group.scan_me.id}",
 ]
 
   subnet_id   = "${module.salt_subnet.subnet_id}"
