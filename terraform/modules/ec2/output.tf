@@ -1,7 +1,11 @@
-output "public_ips" {
-  value = "${aws_instance.ec2_instance.*.public_ip}"
+output "public_ip" {
+  value = "${aws_instance.ec2_instance.0.public_ip}"
 }
 
-output "private_ips" {
-  value = "${aws_instance.ec2_instance.*.private_ip}"
+output "private_ip" {
+  value = "${aws_instance.ec2_instance.0.private_ip}"
+}
+
+output "foo" { 
+  value = "bar"
 }

@@ -39,10 +39,12 @@ module "salt_ec2" {
   ami_id = "${var.centos7_ami["${var.region}"]}"
   ssh_key     = "${aws_key_pair.deployer.key_name}"
 
+  has_public_ip = true
+
   security_group_ids = [
     "${aws_security_group.salt.id}",
     "${aws_security_group.ssh_manage.id}",
-    "${aws_security_group.universal_egress.id}",
+    "${aws_security_group.http_out.id}",
 ]
 
   subnet_id   = "${module.salt_subnet.subnet_id}"
@@ -54,8 +56,12 @@ module "salt_ec2" {
   user_data = "user_data/salt_master"
 }
 
-output "salt-public-addresses" {
-  value = "${module.salt_ec2.public_ips}"
+output "salt-public-address" {
+  value = "${module.salt_ec2.public_ip}"
+}
+
+output "salt-ssh" {
+  value = "ssh -i keys/deployer centos@${module.salt_ec2.public_ip}"
 }
 
 resource "aws_security_group" "salt" {
@@ -78,4 +84,12 @@ resource "aws_security_group" "salt" {
     env       = "${var.env}"
     terraform = "yes"
   }
+}
+
+resource "aws_route53_record" "salt" {
+  zone_id = "${aws_route53_zone.dirty-insec.zone_id}"
+  name    = "salt"
+  type    = "A"
+  ttl     = "86400"
+  records = ["${module.salt_ec2.private_ip}"]
 }

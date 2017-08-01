@@ -25,4 +25,3 @@ resource "aws_instance" "ec2_instance" {
     terraform = "yes"
   }
 }
-

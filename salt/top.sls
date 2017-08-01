@@ -1,21 +1,23 @@
 base:
-  'role:salt-master':
+  'role:salt_master':
     - match: grain
     - packages.salt-master
     - packages.tmux
     - packages.vim
 
 
-  'role:unknown-service':
+  'role:unknown_service':
     - match: grain
     - packages.tmux
     - packages.vim
 
-  'role:anonymous-key-agreement':
+  'role:anonymous_key':
     - match: grain
+    - packages.apache
+    - packages.apache.tls_anonymous
     - packages.tmux
 
-  'role:insecure-services':
+  'role:insecure_services':
     - match: grain
     - packages.tmux
     - packages.vim

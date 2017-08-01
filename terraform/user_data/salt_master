@@ -15,7 +15,7 @@ yum -y install salt-minion salt-master git
 sleep 300
 
 echo 'role:' >>/etc/salt/grains
-echo '- salt' >>/etc/salt/grains
+echo '- salt_master' >>/etc/salt/grains
 
 mkdir -p /etc/salt/minion.d/
 echo 'master: localhost' >/etc/salt/minion.d/master.conf

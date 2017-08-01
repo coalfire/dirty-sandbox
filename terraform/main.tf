@@ -15,23 +15,48 @@ resource "aws_vpc" "dirty-sandbox" {
   }
 }
 
-module "target_subnet" {
-  source = "modules/subnet"
-
-  region = "${var.region}"
-  vpc_id = "${aws_vpc.dirty-sandbox.id}"
-  vpc_cidr = "${var.vpc_cidr}"
-  env = "${var.env}"
-  name = "salt"
-  
-  subnet_index = 1
-
-  count = 1
-
-  availability_zones = "${var.availability_zones}"
-}
-
 resource "aws_key_pair" "deployer" {
   key_name   = "deployer"
   public_key = "${file("keys/deployer.pub")}"
+}
+
+resource "aws_route53_zone" "dirty-insec" {
+  name   = "dirty.insec."
+  vpc_id = "${aws_vpc.dirty-sandbox.id}"
+  force_destroy = false
+
+  tags {
+    Name       = "dirty-insec"
+    env = "${var.env}"
+    terraform  = "yes"
+  }
+}
+
+output "dirty-insec-zone-id" {
+  value = "${aws_route53_zone.dirty-insec.zone_id}"
+}
+
+resource "aws_internet_gateway" "dirty-sandbox" {
+  vpc_id = "${aws_vpc.dirty-sandbox.id}"
+
+  tags {
+    Name      = "dirty-sandbox"
+    env       = "${var.env}"
+    terraform = "yes"
+  }
+}
+
+resource "aws_route_table" "dirty-sandbox" {
+  vpc_id = "${aws_vpc.dirty-sandbox.id}"
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = "${aws_internet_gateway.dirty-sandbox.id}"
+  }
+
+  tags {
+    Name      = "dirty-sandbox"
+    env       = "${var.env}"
+    terraform = "yes"
+  }
 }
