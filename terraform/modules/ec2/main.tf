@@ -25,3 +25,8 @@ resource "aws_instance" "ec2_instance" {
     terraform = "yes"
   }
 }
+
+resource "aws_eip" "elastic_ip" {
+  instance = "${aws_instance.ec2_instance.id}"
+  vpc = true
+}
