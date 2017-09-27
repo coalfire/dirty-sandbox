@@ -95,6 +95,7 @@ resource "aws_security_group" "scan_me" {
     protocol  = "-1"
 
     cidr_blocks = "${var.scanner_cidrs}"
+    security_groups = ["${aws_security_group.scanner.id}"]
   }
 
   tags {
@@ -103,3 +104,16 @@ resource "aws_security_group" "scan_me" {
     terraform = "yes"
   }
 }
+
+resource "aws_security_group" "scanner" {
+  name        = "scanner"
+  description = "dummy sg for network scanners"
+  vpc_id      = "${aws_vpc.dirty-sandbox.id}"
+
+  tags {
+    Name      = "scanner"
+    env       = "${var.env}"
+    terraform = "yes"
+  }
+}
+
