@@ -22,7 +22,7 @@ module "unknown_service" {
 
   subnet_id   = "${module.target_subnet.subnet_id}"
   subnet_cidr = "${module.target_subnet.subnet_cidr}"
-  ip_offset = 5
+  ip_offset = "${var.ip_offset["unknown_service"]}"
 
   user = "centos"
   private_key = "${file("keys/deployer")}"

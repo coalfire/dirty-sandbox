@@ -22,7 +22,7 @@ module "insecure_services" {
 
   subnet_id   = "${module.target_subnet.subnet_id}"
   subnet_cidr = "${module.target_subnet.subnet_cidr}"
-  ip_offset = 4
+  ip_offset = "${var.ip_offset["insecure_services"]}"
 
   user = "centos"
   private_key = "${file("keys/deployer")}"

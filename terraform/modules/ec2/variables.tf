@@ -37,6 +37,11 @@ variable "ip_offset" {
   default     = 4
 }
 
+variable "secondary_network_interface_count" {
+  description = "how many additional network interfaces to attach to instance"
+  default = 0
+}
+
 variable "user" {
   default = "root"
 }

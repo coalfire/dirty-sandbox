@@ -1,11 +1,11 @@
-module "anonymous_key" {
+module "multi_ip" {
   source = "modules/ec2"
 
   aws_access_key = "${var.aws_access_key}"
   aws_secret_key = "${var.aws_secret_key}"
   region = "${var.region}"
 
-  instance_name = "anonymous_key"
+  instance_name = "multi_ip"
   env = "${var.env}"
 
   ami_id = "${var.centos7_ami["${var.region}"]}"
@@ -22,18 +22,20 @@ module "anonymous_key" {
 
   subnet_id   = "${module.target_subnet.subnet_id}"
   subnet_cidr = "${module.target_subnet.subnet_cidr}"
-  ip_offset = "${var.ip_offset["anonymous_key"]}"
+  ip_offset = "${var.ip_offset["multi_ip"]}"
+
+  secondary_network_interface_count = 1
 
   user = "centos"
   private_key = "${file("keys/deployer")}"
   
-  user_data = "user_data/anonymous_key"
+  user_data = "user_data/multi_ip"
 }
 
-output "anonymous_key-public-address" {
-  value = "${module.anonymous_key.public_ip}"
+output "multi_ip-public-address" {
+  value = "${module.multi_ip.public_ip}"
 }
 
-output "anonymous_key-ssh" {
-  value = "ssh -i keys/deployer centos@${module.anonymous_key.public_ip}"
+output "multi_ip-ssh" {
+  value = "ssh -i keys/deployer centos@${module.multi_ip.public_ip}"
 }

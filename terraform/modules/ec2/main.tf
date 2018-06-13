@@ -30,3 +30,24 @@ resource "aws_eip" "elastic_ip" {
   instance = "${aws_instance.ec2_instance.id}"
   vpc = true
 }
+
+resource "aws_network_interface" "secondary" {
+  count = "${var.secondary_network_interface_count}"
+
+  subnet_id = "${var.subnet_id}"
+  description = "secondary network interface"
+
+  private_ips     = ["${cidrhost("${var.subnet_cidr}", count.index + "${var.ip_offset}")} + 1"]
+  security_groups = [ "${var.security_group_ids}" ]
+
+  attachment {
+    instance     = "${aws_instance.ec2_instance.id}"
+    device_index = 1
+  }
+
+  tags {
+    Name      = "secondary-${var.instance_name}-${format("%02d", count.index + 1)}"
+    env       = "${var.env}"
+    terraform = "yes"
+  }
+}
