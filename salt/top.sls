@@ -12,7 +12,7 @@ base:
 
   'role:anonymous_key':
     - match: grain
-    - packages.lighttpd
+    - packages.lighttpd.basic
 
   'role:insecure_services':
     - match: grain
@@ -20,5 +20,4 @@ base:
 
   'role:multi_ip':
     - match: grain
-    - packages.lighttpd
-    - packages.ssh.listen_on_secondary
+    - packages.lighttpd.listen_on_secondary

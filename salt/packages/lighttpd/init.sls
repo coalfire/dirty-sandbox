@@ -16,8 +16,6 @@ lighttpd-service:
     - require: 
       - pkg: lighttpd-package
     - enable: True
-    - watch:
-      - file: lighttpd-config
 
 lighttpd-docroot:
   file.directory:
@@ -25,17 +23,6 @@ lighttpd-docroot:
     - user: lighttpd
     - group: lighttpd
     - mode: 0755
-    - require: 
-      - pkg: lighttpd-package
-
-
-lighttpd-config:
-  file.managed:
-    - source: salt://packages/lighttpd/files/lighttpd.conf
-    - name: /etc/lighttpd/lighttpd.conf
-    - user: root
-    - group: root
-    - mode: 644
     - require: 
       - pkg: lighttpd-package
 

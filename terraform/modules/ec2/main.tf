@@ -37,7 +37,7 @@ resource "aws_network_interface" "secondary" {
   subnet_id = "${var.subnet_id}"
   description = "secondary network interface"
 
-  private_ips     = ["${cidrhost("${var.subnet_cidr}", count.index + "${var.ip_offset}")} + 1"]
+  private_ips     = ["${cidrhost("${var.subnet_cidr}", count.index + "${var.ip_offset}" + 1)}"]
   security_groups = [ "${var.security_group_ids}" ]
 
   attachment {
