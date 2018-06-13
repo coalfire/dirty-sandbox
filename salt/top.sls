@@ -20,4 +20,4 @@ base:
 
   'role:multi_ip':
     - match: grain
-    - packages.lighttpd.listen_on_secondary
+    - packages.lighttpd.listen-on-secondary
