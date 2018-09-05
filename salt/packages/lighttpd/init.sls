@@ -38,4 +38,4 @@ lighttpd-cert-dir:
 lighttpd-cert:
   cmd.run:
     - creates: /etc/lighttpd/certs/lighttpd.pem
-    - name: cd /etc/lighttpd/certs; openssl req -new -x509 -keyout lighttpd.pem -out lighttpd.pem -days 365 -nodes; chmod 600 lighttpd.pem
+    - name: cd /etc/lighttpd/certs; openssl req -nodes -new -x509 -keyout lighttpd.pem -out lighttpd.pem -days 365 -nodes; chown lighttpd:lighttpd lighttpd.pem; chmod 600 lighttpd.pem

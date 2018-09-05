@@ -1,0 +1,2 @@
+default via 172.30.1.1 dev eth1 table admin
+172.30.1.0/24 dev eth1 src 172.30.1.8 table admin

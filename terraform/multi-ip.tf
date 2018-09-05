@@ -24,8 +24,6 @@ module "multi_ip" {
   subnet_cidr = "${module.target_subnet.subnet_cidr}"
   ip_offset = "${var.ip_offset["multi_ip"]}"
 
-  secondary_network_interface_count = 1
-
   user = "centos"
   private_key = "${file("keys/deployer")}"
   
