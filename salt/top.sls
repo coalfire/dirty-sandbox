@@ -20,5 +20,6 @@ base:
 
   'role:multi_ip':
     - match: grain
+    - yum.epel
     - network.secondary
     - packages.lighttpd.listen-on-secondary
