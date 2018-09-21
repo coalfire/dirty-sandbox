@@ -10,7 +10,7 @@ eth1:
 eth1-routes:
   file.managed:
     - name: /etc/sysconfig/network-scripts/route-eth1
-    - owner: root
+    - user: root
     - group: root
     - mode: 644
     - source: salt://network/files/route-eth1
@@ -18,7 +18,7 @@ eth1-routes:
 eth1-rules:
   file.managed:
     - name: /etc/sysconfig/network-scripts/rule-eth1
-    - owner: root
+    - user: root
     - group: root
     - mode: 644
     - source: salt://network/files/rule-eth1
@@ -26,7 +26,7 @@ eth1-rules:
 rt_tables:
   file.managed:
     - name: /etc/iproute2/rt_tables
-    - owner: root
+    - user: root
     - group: root
     - mode: 644
     - source: salt://network/files/rt_tables
