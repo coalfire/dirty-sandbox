@@ -28,6 +28,8 @@ module "multi_ip" {
   private_key = "${file("keys/deployer")}"
   
   user_data = "user_data/multi_ip"
+
+  secondary_network_interface_count = 1
 }
 
 output "multi_ip-public-address" {

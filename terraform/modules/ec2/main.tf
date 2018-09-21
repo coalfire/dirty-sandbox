@@ -14,8 +14,8 @@ resource "aws_instance" "ec2_instance" {
 
   vpc_security_group_ids = [ "${var.security_group_ids}" ]
 
+  private_ip     = "${cidrhost("${var.subnet_cidr}", count.index + "${var.ip_offset}")}"
   associate_public_ip_address = "${var.has_public_ip}"
-  private_ip                  = "${cidrhost("${var.subnet_cidr}", count.index + "${var.ip_offset}")}"
 
   user_data = "${file(var.user_data)}"
 
@@ -27,8 +27,13 @@ resource "aws_instance" "ec2_instance" {
 }
 
 resource "aws_eip" "elastic_ip" {
-  instance = "${aws_instance.ec2_instance.id}"
   vpc = true
+}
+
+
+resource "aws_eip_association" "primary" {
+  network_interface_id = "${aws_instance.ec2_instance.network_interface_id}"
+  allocation_id = "${aws_eip.elastic_ip.id}"
 }
 
 resource "aws_network_interface" "secondary" {
@@ -51,3 +56,14 @@ resource "aws_network_interface" "secondary" {
     terraform = "yes"
   }
 }
+
+resource "aws_eip" "secondary" {
+  vpc = true
+}
+
+resource "aws_eip_association" "secondary" {
+  count         = "${var.secondary_network_interface_count}"
+  network_interface_id   = "${aws_network_interface.secondary.id}"
+  allocation_id = "${aws_eip.secondary.id}"
+}
+
