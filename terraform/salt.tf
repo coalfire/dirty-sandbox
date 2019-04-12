@@ -13,6 +13,7 @@ module "salt_subnet" {
   region = "${var.region}"
   vpc_id = "${aws_vpc.dirty-sandbox.id}"
   vpc_cidr = "${var.vpc_cidr}"
+  vpc_ipv6_cidr = "${aws_vpc.dirty-sandbox.ipv6_cidr_block}"
   env = "${var.env}"
   name = "salt"
   

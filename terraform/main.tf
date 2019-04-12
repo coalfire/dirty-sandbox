@@ -6,7 +6,8 @@ provider "aws" {
 
 resource "aws_vpc" "dirty-sandbox" {
   cidr_block           = "${var.vpc_cidr}"
-  enable_dns_hostnames = false
+  enable_dns_hostnames = true
+  assign_generated_ipv6_cidr_block = true
 
   tags {
     Name      = "dirty-sandbox"
@@ -51,6 +52,11 @@ resource "aws_route_table" "dirty-sandbox" {
 
   route {
     cidr_block = "0.0.0.0/0"
+    gateway_id = "${aws_internet_gateway.dirty-sandbox.id}"
+  }
+
+  route {
+    ipv6_cidr_block = "::/0"
     gateway_id = "${aws_internet_gateway.dirty-sandbox.id}"
   }
 
